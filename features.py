@@ -4,17 +4,6 @@ from operator import itemgetter
 
 from sklearn import feature_extraction
 
-FLOAT_FEATURES = ('latitude', 'longitude')
-STRING_FEATURES = ('summary', 'description', 'source')
-
-OTHER_FEATURES = []
-
-
-def feature(f):
-    OTHER_FEATURES.append(f)
-    return f
-
-
 class Transformer(object):
     def fit_transform(self, X, y=None):
         # Default.  Override if there is a more efficient way of doing this.
@@ -94,10 +83,4 @@ class DictPipeline(Transformer):
             X = thing.transform(X)
         return self.steps[-1].predict(X)
 
-
-def vectorizer_features(name, vec=feature_extraction.CountVectorizer):
-    return DictPipeline([
-        ('accessor', FunctionDictTransformer(itemgetter(name))),
-        ('vec', DictTransformer(vec()))
-    ])
 
