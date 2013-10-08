@@ -1,8 +1,5 @@
 __author__ = 'phobbs'
 
-from operator import itemgetter
-
-from sklearn import feature_extraction
 
 class Transformer(object):
     def fit_transform(self, X, y=None):
